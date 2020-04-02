@@ -1,4 +1,4 @@
-React based projects (fullstackopen.com)
+Projects on fullstackopen.com
 
 Part 0:
 Fundamentals of Web apps
