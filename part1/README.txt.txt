@@ -1,1 +1,0 @@
-Files can be pasted from course-info, anecdotes, unicafe and be replaced in src folder. 
