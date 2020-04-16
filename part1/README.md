@@ -1,3 +1,3 @@
 ### `npm start`
 
-To view the others exercises, simply replace the .js file in the src with the ones in the exercise directories. 
+.js files can be replaced from course-info, anecdotes, unicafe to the src folder to view the particular exercise.
