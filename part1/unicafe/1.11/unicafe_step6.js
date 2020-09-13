@@ -52,7 +52,7 @@ const Statistics = ({ good, neutral, bad, total, positive }) => {
             <Statistic text="neutral" value={neutral} />
             <Statistic text="bad " value={bad} />
             <Statistic text="all" value={total} />
-            <Statistic text="average" value={(good - bad)} />
+            <Statistic text="average" value={(good - bad)/(good + neutral + bad)} />
             <Statistic text="positive" value={positive} /> 
         </table>
       </>
