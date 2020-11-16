@@ -20,30 +20,32 @@ const Footer = () => {
 
 const App = () => {
     const [notes, setNotes] = useState([])
-    const [newNote, setNewNote] = useState('') 
+    const [newNote, setNewNote] = useState('')
     const [showAll, setShowAll] = useState(true)
-    const [errorMessage, setErrorMessage] = useState('some error happened...')
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         noteService
             .getAll()
-            .then(initialNotes => { 
-                setNotes(initialNotes) 
-            }) 
-    }, []) /* The var name initialnotes can be used here instead of response.data because we return response.data in services/notes.js */
+            .then(initialNotes => {
+                setNotes(initialNotes)
+            })
+    }, []) 
+    /* The var name initialnotes can be used here instead of response.data because 
+        we return response.data in services/notes.js */
 
     const handleNoteChange = (event) => {
-        console.log(event.target.value)
         setNewNote(event.target.value)
     }
 
 
-    const toggleImportanceOf = id => {
+    const toggleImportanceOf = (id) => {
         const note = notes.find(n => n.id === id)
         const changedNote = { ...note, important: !note.important }
 
         noteService
-            .update(changedNote).then(returnedNote => {
+            .update(id, changedNote)
+            .then(returnedNote => {
                 setNotes(notes.map(note => note.id !== id ? note : returnedNote))
             })
             .catch(error => {
@@ -53,9 +55,9 @@ const App = () => {
                 setTimeout(() => {
                     setErrorMessage(null)
                 }, 5000)
-                setNotes(notes.filter(n => n.id !== id))
+                
             })
-    } 
+    }
 
     const notesToShow = showAll
         ? notes
@@ -64,10 +66,10 @@ const App = () => {
     const addNote = (event) => {
         event.preventDefault()
         const noteObject = {
+            id: notes.length + 1,
             content: newNote,
             date: new Date().toISOString(),
-            important: Math.random() < 0.5,
-            id: notes.length + 1,
+            important: Math.random() < 0.5
         }
 
         noteService
@@ -81,6 +83,12 @@ const App = () => {
     return (
         <div>
             <h1>Notes</h1>
+            <div>
+                <button onClick={() => setShowAll(!showAll)}>
+                    show {showAll ? 'important' : 'all'}
+                </button>
+            </div>
+            <br />
             <Notification message={errorMessage} />
             <ul>
                 {notesToShow.map((note, i) =>
@@ -91,17 +99,10 @@ const App = () => {
                     />
                 )}
             </ul>
-
-            <div>
-                <button onClick={() => setShowAll(!showAll)}>
-                    show {showAll ? 'important' : 'all'}
-                </button>
-            </div>
-
             <form onSubmit={addNote}>
                 <input value={newNote} onChange={handleNoteChange} />
                 <button type="submit" onClick={addNote}>save</button>
-            </form> 
+            </form>
             <Footer />
         </div>
     )
