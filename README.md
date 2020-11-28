@@ -1,4 +1,4 @@
-## Projects on fullstackopen.com
+## Projects on fullstackopen (MERN stack)
 
 Part 0:
 Fundamentals of Web apps
@@ -26,3 +26,9 @@ React router, styling app with CSS and webpack
 
 Part 8:
 GraphQL
+
+Part 9:
+Typescript
+
+Part 10:
+React Native
