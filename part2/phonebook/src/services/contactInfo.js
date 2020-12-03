@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = '/api/contacts'
+const baseUrl = '/api/contacts' 
+
+//baseURL = without backend '/persons' ; With backend '/api/contacts (for part 3)'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
