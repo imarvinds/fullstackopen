@@ -77,8 +77,18 @@ app.put('/api/contacts/:id', (request, response, next) => {
         number: body.number
     }
 
+    Contact.findOneAndUpdate({ _id: request.params.id }, personToUpdate, { new: true, runValidators: true }, function (error, result) {
+        if (error) {
+            next(error)
+        } else {
+            response.json(result)
+        }
+    })
+
     /*
+
     // findIdByUpdate vs findOneAndUpdate
+    
         Contact.findByIdAndUpdate(request.params.id, personToUpdate, {new:true})
         .then(updatedContact => {
             response.json(updatedContact)
@@ -87,13 +97,6 @@ app.put('/api/contacts/:id', (request, response, next) => {
 
     */
 
-    Contact.findOneAndUpdate({ _id: request.params.id }, personToUpdate, { new: true, runValidators: true }, function (error, result) {
-        if (error) {
-            next(error)
-        } else {
-            response.json(result)
-        }
-    })
 
 })
 
