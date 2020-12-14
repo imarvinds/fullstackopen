@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title": "Oxygen",
+    "author": "Arv",
+    "url": "/arv/chemistry/oxygen",
+    "likes": 5
+}
